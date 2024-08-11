@@ -6,7 +6,7 @@ def extract_tables_from_pdf(pdf_path, table_indices):
     return selected_tables
 
 def main():
-    pdf_path = "/Users/anujmehra/git/python-streamlit/python-streamlit/pdfplumber/TaxData.pdf"
+    pdf_path = "/Users/anujmehra/git/python-streamlit/python-streamlit/camelot/SamplePDF.pdf"
     table_indices = [0, 2]  # Indices of tables you want to extract
 
     tables = extract_tables_from_pdf(pdf_path, table_indices)
