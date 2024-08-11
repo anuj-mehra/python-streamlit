@@ -22,13 +22,17 @@ with pdfplumber.open(pdfPath) as pdf:
             print(f"Table {table_number}:")
             if table:  # Check if the table is not empty
                 first_row: list[str] = table[0]  # Get the first row
-                num_columns = len(first_row)  # Get the number of columns in the first row
-                print(f"Row 1 has {num_columns} columns: {first_row}")
-                tableColumnslist.append(first_row)  # Add the first row to the list
+                cleaned_first_row: list[str] = [value for value in first_row if value is not None]
+                num_columns: int = len(cleaned_first_row)  # Get the number of columns in the first row
+                print(f"Row 1 has {num_columns} columns: {cleaned_first_row}")
+                tableColumnslist.append(cleaned_first_row)  # Add the first row to the list
             print("\n")
 
+        print(f"tableColumnslist= {tableColumnslist}")
         for e in tableColumnslist:
+            print(f"e==>{e}")
             np_columns: ndarray[Any, dtype[Any]] = np.array(e)
+            print(f"np_columns==>{np_columns}")
             schema = StructType([StructField(column, StringType(), True) for column in np_columns])
             schemas.append(schema)
             print(schema)
@@ -40,3 +44,5 @@ with pdfplumber.open(pdfPath) as pdf:
                 num_columns = len(row)  # Get the number of columns in the row
                 print(f"Row {row_number} has {num_columns} columns: {row}")
             print("\n")
+
+            
